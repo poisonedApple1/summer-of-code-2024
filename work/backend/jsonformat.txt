@@ -1,0 +1,35 @@
+for customer data:
+
+{
+    "c_name": "aman",
+    "c_email": "degala@gmail.com",
+    "c_contact": "1234567890"
+}
+
+for transaction data:
+
+{
+    "c_id":"1",
+    "t_amount":"125",
+    "t_category":"books",
+    "t_date": "29-06-2024 15-30-20"
+}
+
+for staff data:
+
+{
+    "s_name":"aman",
+    "s_email":"degala@gmail.com",
+    "s_contact":"1234567890",
+    "s_isAdmin":"1"
+}
+
+for itemdata
+
+{
+    "item_name":"Apple iPhone 13",
+    "item_description":"sell your kidney fo this!",
+    "item_price":"999999",
+    "item_qty":"5"
+}
+
