@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 
 app=Flask(__name__)
@@ -11,22 +12,12 @@ from models.Customer import Customer
 from models.Transaction import Transaction
 from models.Staff import Staff
 from models.InventoryItem import InventoryItem
-# class Customer(db.Model):
-#     __tablename__ = 'customer'
-#     c_id = db.Column(db.Integer, primary_key=True)
-#     c_name = db.Column(db.String, nullable=False)
-#     c_email = db.Column(db.String, nullable=False)
-#     c_contact = db.Column(db.String(10), nullable=False)
 
-#     def __init__(self, c_name, c_email, c_contact):
-#         self.c_name = c_name        
-#         self.c_email = c_email        
-#         self.c_contact = c_contact
 
 with app.app_context():
     db.create_all()
 
-
+migrate=Migrate(app,db)
 @app.route("/")
 def hello():    
     return "Hello World!"

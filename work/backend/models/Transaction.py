@@ -26,10 +26,14 @@ class Transaction(db.Model):
             date=datetime.strptime(data["t_date"], "%m-%d-%Y  %H-%M:%S" )
         except:
             date=datetime.now(timezone.utc)
-        self.c_ID=cust_id
-        self.t_date=date
-        self.t_amount=amount
-        self.t_category=category  
+        try:
+            self.c_ID=cust_id
+            self.t_date=date
+            self.t_amount=amount
+            self.t_category=category
+        except KeyError:
+            print(KeyError)
+
     
     def register_transaction_if_not_exist(self):
         db_transaction = Transaction.query.filter(Transaction.t_ID == self.t_ID).all()
