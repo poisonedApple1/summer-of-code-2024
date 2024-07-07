@@ -1,4 +1,5 @@
 from app import db
+from flask import jsonify
 
 class InventoryItem(db.Model):
     __tablename__="inventoryitem"
@@ -34,13 +35,33 @@ class InventoryItem(db.Model):
         db_item = InventoryItem.query.filter(InventoryItem.Item_SKU == sku).first()
         return db_item
     
-    def updateQty(sku,change):
-        db_item= InventoryItem.get_by_SKU(sku)
+    def updateQty(data):
+        db_item= InventoryItem.get_by_SKU(data["Item_SKU"])
         if db_item:
-            db_item.Item_qty+=change
+            if data["Item_name"]:
+                db_item.Item_name=data["Item_name"]
+            if data["Item_qty"]:
+                db_item.Item_qty=data["Item_qty"]
+            if data["Item_price"]:
+                db_item.Item_price=data["Item_price"]
+            if data["Item_description"]:
+                db_item.Item_description=data["Item_description"]
+            
             db.session.commit()
             return db_item
-        
+    
+    def itemCount():
+        count=db.session.query(InventoryItem).count()
+        return count
+    
+    def fetchItem(offset):
+        data=InventoryItem.query.offset(offset).limit(10).all()
+        itemList=[{'Item_SKU': item.Item_SKU,
+                    'Item_name': item.Item_name,
+                    'Item_price':item.Item_price,
+                    'Item_description':item.Item_description,
+                    'Item_qty':item.Item_qty} for item in data]
+        return itemList
 
     def __repr__(self):
         return f"<InventoryItem SKU: {self.Item_SKU} name: {self.Item_name} desc: {self.Item_description} price: {self.Item_price} qty: {self.Item_qty} >"

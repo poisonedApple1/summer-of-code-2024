@@ -4,47 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bizarre : The Bazaar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="login.css">
 </head>
-<body>
-    <div id="wrapper-login">
-        <div id="loginBox">
-            <div id="logCredentials">
-                <div id="logo"></div>
-                <h2>Login</h2>
-                <p>Email</p>
-                <input placeholder="Email" id="email">
-                <p>Password</p>
-                <input placeholder="Password" id="password"><br>
-                <button class="button" type="button" >Sign In</button>
+<body> 
+
+
+
+    <div class="container" id="details">
+        <div class="row justify-content-center align-items-center" id="loginBox">
+
+            
+
+
+            <div class="col-12">
+                <form id="logCredentials">
+                    <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
+                    <label class="btn" for="option1">Cashier</label>
+
+
+                    <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
+                    <label class="btn" for="option2">Admin</label>
+                
+
+                    <div class="form-floating my-3"  >
+                        <input type="email" class="form-control"  id="loginEmail" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3" >
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="submit">
+                        <button type="submit" class="btn btn-outline-light">Sign In</button>
+                    </div>
+                    <div id="alert"></div>
+                </form>
             </div>
-            <div id="or">
-                <p>or continue with</p>
-            </div>
-            <div id="other">
-                <button id="google" type="button"></button>
-                <button id="git" type="button"></button>
-                <button id="facebook" type="button"></button>
-            </div>
-            <div id="signup">
+
+            <div class="col-12">
                 <p id="dont">Don't have an account?</p>
-                <p id="reg">Register for free</p>
+                <a id="reg" href="signup.html">Register here</a>                
             </div>
+
         </div>
     </div>
-    <div id="bg-elements">
-        <div id="ribbon"></div>
-        <div id="ele2"></div>
-        <div id="ribbon1"></div>
-        <div id="ribbon3"></div>
-        <div id="ribbon4"></div>
-        <div id="ribbon4-2"></div>
-        <div id="ribbon5"></div>
-        <div id="ribbon5-2"></div>
-        <div id="ribbon5-3"></div>
-        <div id="ribbon5-4"></div>
-        <div id="ribbon-3"></div>
-        <div id="ribbon4-2"></div>
+
+
+
+    <div id="bg">
+        <div id="bg-elements">
+            <div id="ribbon"></div>
+            <div id="ele2"></div>
+            <div id="ribbon4"></div>
+            <div id="ribbon4-2"></div>
+            <div id="ribbon5"></div>
+            <div id="ribbon5-2"></div>
+            <div id="ribbon5-3"></div>
+            <div id="ribbon5-4"></div>
+            <div id="ribbon-3"></div>
+           
+        </div>
     </div>
+    <script src="lol.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

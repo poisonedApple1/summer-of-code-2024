@@ -10,119 +10,143 @@ body{
     /* background-color: #C85C3E; */
     overflow: hidden;
     background: rgb(36,0,20);
-    background: linear-gradient(90deg, rgba(36,0,20,1) 0%, rgba(151,0,90,1) 35%, rgba(255,0,97,1) 100%);
+    
 }
 
-#wrapper-login{
+
+#bg{
+    height:100vh;
+    width: 100vw;
+    position: relative;
+    background: linear-gradient(90deg, rgba(36,0,20,1) 0%, rgba(151,0,90,1) 35%, rgba(255,0,97,1) 100%);
+    z-index:-1 ;
+    position: absolute;
+    top: 0;
+}
+
+#details{
+    height:100vh;
+    width: 100vw;
+    position: relative;
+    z-index: 1;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
+
 #loginBox{
-    position: relative;
-    top: 9em;
-    height: 25em;
-    width:  25em; 
-    border: 1px solid rgb(185, 185, 185);
+
+    /* height: 25rem;
+    width:  30em;  */
+    border: 1px solid #faf2de;
     border-radius: 10px;
     background-color:  rgba(179, 177, 177, 0.299);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
     z-index: 2;
+    padding: 1rem;
 }
 
 #logo{
-    height: 2.75em;
+    height: 2.5rem;
     background-image: url("logo.png");
     background-size: contain;
     background-repeat:no-repeat;
-    margin-bottom: 1em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /*enter details*/
-#logCredentials h2{
+.btn {
+    color: #ffffff !important; 
+    padding: 0.5em 1em;
+    border-radius: 0.25em; 
+}
+
+
+.btn-check:hover + .btn{
+    border:2px solid #faf2de58;
+}
+
+.btn-check:checked + .btn {
+    border:2px solid #faf2de;
+}
+
+.submit button{
+    margin-top: 0.25em;
+    margin-bottom: 0.75em;
+    width: 15em;
+}
+
+.submit button:hover{
+    background-color: #faf2de2f;
+}
+
+
+#logCredentials h3{
     position: relative;
     left: 0.25em;
     margin-bottom: 0.5em;
     color: #faf2de;
 }
 
-
-#logCredentials p{
-    font-size: 0.75em;
-    position: relative;
-    left: 1em;
+#choose-role{
     color: #faf2de;
-    margin-bottom: 0.2em;
 }
 
-#logCredentials input{
-    width: 27em;
+#logCredentials label{
+    color: black;
+}
+
+
+.role{
+    border: none;
+    background-color: #d5669499;
+    width: 10rem;
+    height: 2rem;
+    border: 2px solid #faf2de;
+    border-radius: 1rem;
+    color:#faf2de
+}
+
+#loginEmail{
     margin-bottom: 0.5em;
-    height: 2em;
+    height: 2rem;
     border-radius: 1em;
     padding-left: 0.75em;
-}
+} 
 
-.button{
-    margin-top: 1em;
-    height: 2em;
+#loginPassword{
+    margin-bottom: 0.5em;
+    height: 2rem;
     border-radius: 1em;
-    background-color: #D6C9AA;
-    width: 27em;
+    padding-left: 0.75em;    
 }
 
 
-/* other signup potions*/
-#google{
-    background-image: url("flat-color-icons_google.png");
-    background-size: 1.75em;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 2.5em;
-    width:8em;
-    border: 1px solid black;
-    border-radius: 2em;
-}
-
-#git{
-    background-image: url("akar-icons_github-fill.png");
-    background-size: 1.75em;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 2.5em;
-    width:8em;
-    border: 1px solid black;
-    border-radius: 2em;
-}
-
-#facebook{
-    background-image: url("bi_facebook.png");
-    background-size: 1.75em;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 2.5em;
-    width:8em;
-    border: 1px solid black;
-    border-radius: 2em;
-}
-
-#other{
-    width: 23em;
-    display: flex;
-    justify-content: space-around;
-}
-
-#signup p{
+#dont{
     display: inline;
+    color:#faf2de
 }
 
 #reg{
     font-weight: bolder;
+    display: inline;
+    color:#faf2de;
 }
+
+.submit{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.submit input{
+    height: 3rem;
+    width:20rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+
 
 
 /*background elements*/

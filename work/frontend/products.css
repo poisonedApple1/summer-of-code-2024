@@ -1,0 +1,23 @@
+body{
+    background: linear-gradient(90deg, rgb(2, 70, 101) 0%, rgb(57, 146, 187) 35%, rgb(130, 163, 179) 100%);
+}
+
+#manage{
+    margin-top: 5vh;
+    background-color: rgba(240, 248, 255, 0.532);
+    padding: 2rem;
+    border: 2px solid aliceblue;
+}
+
+
+.manageUpd{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-color: black;
+}
+
+.manageDel{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-color: black;
+}

@@ -5,6 +5,7 @@ Flask-Migrate
 Flask-RESTx
 Flask-SQLAlchemy
 SQLAlchemy
+flask-cors
 
 
 
