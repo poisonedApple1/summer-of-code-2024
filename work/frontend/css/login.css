@@ -48,7 +48,7 @@ body{
 
 #logo{
     height: 2.5rem;
-    background-image: url("logo.png");
+    background-image: url("../images/logo.png");
     background-size: contain;
     background-repeat:no-repeat;
     margin-top: 1rem;
@@ -151,7 +151,7 @@ body{
 
 /*background elements*/
 #ribbon{
-    background-image: url("ribbon.png");
+    background-image: url("../images/ribbon.png");
     background-size: contain;
     background-repeat: no-repeat;
     width: 30em;
@@ -168,13 +168,13 @@ body{
     position: absolute;
     bottom: 0px;
     left: 0px;
-    background-image: url("12.png");
+    background-image: url("../images/12.png");
 }
 
 #ribbon1{
     height: 20vh;
     width: 20vh;
-    background-image: url("ribbon1.png");
+    background-image: url("../images/ribbon1.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -186,7 +186,7 @@ body{
 #ribbon3{
     height: 15vh;
     width: 15vh;
-    background-image: url("ribbon1.png");
+    background-image: url("../images/ribbon1.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -198,7 +198,7 @@ body{
 #ribbon4{
     height: 35vh;
     width: 35vh;
-    background-image: url("ribbon4.png");
+    background-image: url("../images/ribbon4.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -212,7 +212,7 @@ body{
 #ribbon5{
     height: 20vh;
     width: 20vh;
-    background-image: url("ribbon5.png");
+    background-image: url("../images/ribbon5.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -225,7 +225,7 @@ body{
 #ribbon5-2{
     height: 15vh;
     width: 15vh;
-    background-image: url("ribbon5.png");
+    background-image: url("../images/ribbon5.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -238,7 +238,7 @@ body{
 #ribbon5-3{
     height: 12vh;
     width: 12vh;
-    background-image: url("ribbon5.png");
+    background-image: url("../images/ribbon5.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -251,7 +251,7 @@ body{
 #ribbon5-4{
     height: 13vh;
     width: 13vh;
-    background-image: url("ribbon5.png");
+    background-image: url("../images/ribbon5.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -265,7 +265,7 @@ body{
 #ribbon-3{
     height: 70vh;
     width: 70vh;
-    background-image: url("ribbon.png");
+    background-image: url("../images/ribbon.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -277,7 +277,7 @@ body{
 #ribbon4-2{
     height: 55vh;
     width: 55vh;
-    background-image: url("ribbon4.png");
+    background-image: url("../images/ribbon4.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
