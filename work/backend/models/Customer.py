@@ -28,5 +28,22 @@ class Customer(db.Model):
         db_customer = Customer.query.filter(Customer.c_contact == c_contact).first()
         return db_customer
 
+    def get_by_id(c_ID):        
+        db_customer = Customer.query.filter(Customer.c_ID == c_ID).first()
+        return db_customer
+    
+    def updateCustomer(data):
+        db_customer= Customer.get_by_id(data["c_ID"])
+        if db_customer:
+            
+            db_customer.c_name=data["c_name"]
+        
+            db_customer.c_contact=data["c_contact"]
+        
+            db_customer.c_email=data["c_email"]
+            
+            db.session.commit()
+        return db_customer
+    
     def __repr__(self):
         return f"<Customer {self.c_contact}>"

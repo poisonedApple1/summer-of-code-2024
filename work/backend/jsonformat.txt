@@ -21,7 +21,8 @@ for staff data:
     "s_name":"aman",
     "s_email":"degala@gmail.com",
     "s_contact":"1234567890",
-    "s_isAdmin":"1"
+    "s_isAdmin":"1",
+    "s_password": "blah"
 }
 
 for itemdata

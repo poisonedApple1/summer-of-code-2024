@@ -6,7 +6,8 @@ Flask-RESTx
 Flask-SQLAlchemy
 SQLAlchemy
 flask-cors
-
+flask_login
+flask_bcrypt
 
 
 

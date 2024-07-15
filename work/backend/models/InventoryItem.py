@@ -35,7 +35,7 @@ class InventoryItem(db.Model):
         db_item = InventoryItem.query.filter(InventoryItem.Item_SKU == sku).first()
         return db_item
     
-    def updateQty(data):
+    def updateItem(data):
         db_item= InventoryItem.get_by_SKU(data["Item_SKU"])
         if db_item:
             if data["Item_name"]:
@@ -48,7 +48,7 @@ class InventoryItem(db.Model):
                 db_item.Item_description=data["Item_description"]
             
             db.session.commit()
-            return db_item
+        return db_item
     
     def itemCount():
         count=db.session.query(InventoryItem).count()

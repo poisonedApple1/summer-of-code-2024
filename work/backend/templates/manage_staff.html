@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {% include 'stuff.html' %}
+    <link rel="stylesheet" href="../static/css/products.css"> 
+</head>
+<body>
+    {% include 'navbar_admin.html' %}
+    
+    <div class="container " id="manage">
+        <h4>Manage Staff</h4>
+        <div class="row justify-content-left">
+            <div class="col-lg-1 my-2"><button type="button" class="btn btn-outline-dark" id="search" ><i class="bi bi-search"></i> Search</button></div>
+            <div class="col-lg-1 my-2" ><a type="button" class="btn btn-outline-dark" id="add" href="registerStaff">
+                <i class="bi bi-plus-circle-dotted"></i>  <span style="display: block;">  Add</span></a>
+            </div>
+        </div>
+
+        <br>
+        <h6>Showing <span id="num">10</span> of <span id="count">count</span> staff </h6>
+
+        <div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item disabled" id="lp">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item" id="l1"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item disabled" id="l2"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item disabled" id="l3"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item disabled" id="ln">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </div>
+
+        <table class="table" id="prodTable">
+            <thead>
+                <tr>
+                  <th scope="col">S.no</th>
+                  <th scope="col">Staff ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="product_table">
+               </tbody> 
+        </table>
+    </div>
+
+<!--modals-->
+
+  <div class="modal fade" id="delModal2" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="productInfo">
+              <ol>
+                <li>Staff name : <span id=delName></span></li>
+                <li>Staff Contact : <span id=delPrice></span></li>
+                <li>Admin : <span id=delQty></span></li>
+                <li>Staff Email : <span id=delDesc></span></li>
+              </ol>
+              <div id="updAlert"></div>
+            </div>
+            <form id="delItem">
+                <h6>Are you sure you want to delete this product?</h6>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div id="alert"></div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="updModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Update</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="addItem">
+
+                <div class="form-floating my-3">
+                  <input type="number" class="form-control"  id="upditemSKU" placeholder="name">
+                  <label for="floatingInput">SKU</label>
+              </div>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updModal2">Next</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div id="alert"></div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updModal2" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title">Update product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div id="updInfo">
+            <ol>
+              <li>Staff name : <span id=updName>name</span></li>
+              <li>Admin : <span id=updPrice></span></li>
+              <li>Staff Contact : <span id=updQty></span></li>
+              <li>Staff Email : <span id=updDesc></span></li>
+            </ol>
+            
+          </div>
+          <form id="updItemForm">
+
+                <div class="form-floating my-3">
+                  <input type="text" class="form-control"  id="upditemName" placeholder="name">
+                  <label for="floatingInput">Updated Name</label>
+              </div>
+
+              
+                <select class="form-select" aria-label="Role" id="upditemQty">
+                    <option value="2" selected>Update Role</option>
+                    <option value="1">Admin</option>
+                    <option value="0">Cashier</option>
+                </select>
+              
+
+              <div class="form-floating my-3">
+                  <input type="number" class="form-control"  id="upditemPrice" placeholder="name">
+                  <label for="floatingInput">Updated Contact</label>
+              </div>
+
+              <div class="form-floating my-3">
+                  <input type="text" class="form-control"  id="upditemDesc" placeholder="name">
+                  <label for="floatingInput">Updated Email</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <br>
+              <br>
+              <div id="updAlert"> 
+                <div  role="alert" id="ualert">
+                
+                </div>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+          
+           
+      
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      </div>
+  </div>
+</div>
+{% include 'bg_elements.html' %}
+
+    <script src="../static/js/staff.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
