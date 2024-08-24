@@ -46,33 +46,6 @@ def load_user(s_ID):
 # staff1=Staff.query.filter_by(s_ID='1').first()
 # login_user(staff1)
 
-# from weasyprint import HTML
-# @app.route('/pdf')
-# def pdf():
-#     with app.test_request_context(base_url="http://localhost:3000/"):
-#         pdf=HTML('/pdfDownload').write_pdf('idk.pdf')
-#         return ('stuff.html')
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-
-
-w,h = A4
-
-c=canvas.Canvas('Hello.pdf')
-
-c.setStrokeColorRGB(0.5,0.5,0.5)
-c.setFillColorRGB(0.75 , 0.5 , 0.5)
-c.roundRect(50,50,w-100,h-100,10)
-
-heading= c.beginText(w/2-25,h-75)
-heading.textLine("INVOICE")
-heading.setFont("Times-Roman",12)
-
-c.drawText(heading)
-
-c.grid([80,100,400,w-80],[h-90,h-110,h-150])
-c.showPage()
-c.save()
 
 
 if __name__ == "main":

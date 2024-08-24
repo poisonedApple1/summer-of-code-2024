@@ -1,4 +1,29 @@
-function makeList(itemData,offset){
+const URGENT = 10;
+const LOW = 50;
+const OK = 100;
+
+function quantityStatus(qty) {
+    var qtystat=document.createElement('td')
+    var status = document.createElement('div')
+
+    console.log(qty)
+    if (qty < URGENT) {
+        status.setAttribute('class','btn btn-outline-danger disabled')
+        status.innerHTML='URGENT'
+    }
+    else if (qty < LOW) {
+        status.setAttribute('class','btn btn-outline-warning disabled')
+        status.innerHTML='LOW'
+    }
+    else {
+        status.setAttribute('class','btn btn-outline-success disabled')
+        status.innerHTML='OK'
+    }
+    qtystat.appendChild(status)
+    return qtystat
+}
+
+function makeList(itemData, offset) {
     var serial=1+offset;
     var itemTable=document.getElementById("product_table");
         for (let item of itemData){
@@ -45,6 +70,7 @@ function makeList(itemData,offset){
             entry.appendChild(qty);
             entry.appendChild(price);
             entry.appendChild(desc);
+            entry.appendChild(quantityStatus(item["Item_qty"]));
             entry.appendChild(buttons);
             buttons.appendChild(upd);
             buttons.appendChild(del);

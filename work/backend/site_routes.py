@@ -10,6 +10,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField
 from wtforms.validators import InputRequired  ,Length,ValidationError
 from functools import wraps
+from datetime import datetime
 
 
 site=Blueprint('site',__name__)
@@ -78,7 +79,7 @@ def lol():
 @admin_required(True)
 def home():
     # logout_user()
-    return render_template('admin_dashboard.html')
+    return render_template('admin_dashboard.html',name=current_user.s_name,date=(str)(datetime.now())[:11])
 
 @site.route('/logout')
 @login_required

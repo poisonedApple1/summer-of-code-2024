@@ -110,45 +110,46 @@ document.addEventListener("DOMContentLoaded",()=>{
             table.innerHTML=' ';
             getData_MakeList(x);
         })
-        if(!lp.classList.contains('disabled')){
-            lp.addEventListener('click',()=>{
-                x-=10;
-                ln.setAttribute("class","page-item");
-                value1--;
-                l1.querySelector('a').innerText=value1;
-                l2.querySelector('a').innerText=value1+1;
-                l3.querySelector('a').innerText=value1+1;
-                if(value1==1)lp.setAttribute("class","page-item disabled");
-            })
-        }
+        
+        lp.addEventListener('click', () => {
+            if (lp.classList.contains('disabled')) return;
+            x-=10;
+            if(count > 30)ln.setAttribute("class","page-item");
+            value1--;
+            l1.querySelector('a').innerText=value1;
+            l2.querySelector('a').innerText=value1+1;
+            l3.querySelector('a').innerText=value1+2;
+            if(value1==1)lp.setAttribute("class","page-item disabled");
+        })
+        
 
-        if ((count/10)>1){
+        if (count > 10) {
             l2.setAttribute("class","page-item");
             l2.addEventListener('click',()=>{
                 var table=document.getElementById('product_table');
-
                 table.innerHTML=' ';
                 getData_MakeList(x+10);
             })
         }
-        if ((count/10)>2){
+        if (count > 20) {
             l3.setAttribute("class","page-item");
             l3.addEventListener('click',()=>{
                 var table=document.getElementById('product_table');
-
                 table.innerHTML=' ';
                 getData_MakeList(x+20);
             })
         }
-        if ((count/10)>3){
+        if (count > 30) {
+            
             ln.setAttribute("class","page-item");
-            ln.addEventListener('click',()=>{
+            ln.addEventListener('click', () => {
+                if (ln.classList.contains('disabled')) return;
                 x+=10;
                 lp.setAttribute("class","page-item");
                 value1++;
                 l1.querySelector('a').innerText=value1;
                 l2.querySelector('a').innerText=value1+1;
-                l3.querySelector('a').innerText=value1+1;
+                l3.querySelector('a').innerText=value1+2;
                 if(count<=x+30)ln.setAttribute("class","page-item disabled");
             })
         }

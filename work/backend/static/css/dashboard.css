@@ -1,16 +1,104 @@
+
+
 #dp{
-    background-color: black;
+    background-image: url("../images/zazu.jpg");
+    background-size: cover;
     height: 100px;
     width: 100px;
+    margin-right: 2rem;
+    border: 1px solid rgb(236, 216, 64);
+    border-radius: 1rem;
 }
 
+body{
+    width: 100vw;
+}
 
-
+#details{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
 
 #dashboard{
-    margin-top: 5vh;
-    background-color: rgba(240, 248, 255, 0.532);
-    padding: 2rem;
-    border: 2px solid aliceblue;
-    border-radius: 2rem;
+    margin: 0;
+    background-color: rgba(51, 19, 0, 0.532);
+    padding: 5rem;
+    border: 2px solid rgb(115, 90, 89);
+    color: rgb(236, 216, 64);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+#welcome{
+    background-color: rgba(31, 17, 5, 0.533);
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.695);
+}
+
+.item {
+    display: flex;
+    background-color: aquamarine;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(31, 17, 5, 0.533);
+    border: 0.1rem solid rgb(29, 182, 32);
+    color: rgb(236, 216, 64);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .status{
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .red{
+    color:rgb(0, 0, 0);
+    background-color:rgb(219, 35, 35) ;
+  }
+
+  .green{
+    color:rgb(0, 0, 0);
+    background-color: rgb(30, 222, 30);
+  }
+
+  .yellow{
+    color:rgb(0, 0, 0);
+    background-color: yellow;
+  }
+
+  #newScroll{
+    height: 390px;
+    overflow-y: scroll;
+    
+  }
+  #News{
+    background-color: rgba(36, 42, 46, 0.268);
+    height: 490px;
+    padding: 1rem;
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+ 
+  #top{
+    padding: 1rem;
+    background-color: rgba(36, 42, 46, 0.268);
+    height: 490px;
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+  #revChart{
+    background-color:rgba(36, 42, 46, 0.268) ;
+    padding: 1rem;
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+  #staffCount{
+    background-color:rgba(36, 42, 46, 0.268) ;
+    padding: 1rem;
+    border: 1px solid rgb(0, 0, 0);
+  }

@@ -194,6 +194,43 @@ class TransactionList(Resource):
 
 api.add_resource(TransactionList,"/transactData")
 
+class TransactionInfo(Resource):
+    def get(self):
+        date=datetime.now().date()
+        top_transactions = Transaction.query.filter(db.func.date(Transaction.t_date) == date).order_by(Transaction.t_amount.desc()).limit(3)  .all()
+        transactions_data = [
+        {
+        "t_ID": transaction.t_ID,
+        "t_time": (str)(transaction.t_date)[11:16],
+        "t_amount": transaction.t_amount,
+        "c_ID": transaction.c_ID,
+        "t_category":transaction.t_category
+        }
+         for transaction in top_transactions
+        ]   
+
+        return {"data": transactions_data}
+    
+    def post(self):
+        date=datetime.now().date()
+        dates=[]
+        revenues=[]
+        for i in range(6,-1,-1):
+            date1=date-timedelta(days=i)
+            dates.append((str)(date1))
+
+            dateData=Transaction.query.filter(db.func.date(Transaction.t_date)==date1).all()
+            sum=0
+            if(dateData):
+                for transaction in dateData:
+                    sum+=transaction.t_amount
+            revenues.append(sum)
+        
+        return {"dates":dates,"revenues":revenues}
+
+
+api.add_resource(TransactionInfo,"/transactInfo")
+
 #manage staff data--------------------------------------------------------------------------------------------------
 
 # staff_login=reqparse.RequestParser()
@@ -270,6 +307,11 @@ staff_find=reqparse.RequestParser()
 staff_find.add_argument("s_ID",type=int,required=True,help="Id not provided")
 
 class StaffList(Resource):
+    def get(self):
+        admin=Staff.query.filter(Staff.s_isAdmin==True).count()
+        cashier=Staff.staffCount() - admin
+        return {"admin": admin,"cashier" : cashier}
+
     def post(self):
         data=staff_list.parse_args()
         offset=data["offset"]
@@ -386,6 +428,14 @@ item_cat=reqparse.RequestParser()
 item_cat.add_argument('category',type=str,help="invalid category")
 
 class ItemList(Resource):
+    def get(self):
+        items=InventoryItem.query.filter(InventoryItem.Item_qty<50).all()
+        data=[{
+            "name":item.Item_name,
+            "qty":item.Item_qty
+        } for item in items]
+        return {"data": data}
+
     def post(self):
         data=item_list.parse_args()
         offset=data["offset"]
@@ -406,7 +456,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate,Table,TableStyle,Paragraph
-from datetime import datetime,timezone
+from datetime import datetime,timezone,timedelta
 class PrintPdf(Resource):
     def post(self):
         data=request.json
