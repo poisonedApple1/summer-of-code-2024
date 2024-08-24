@@ -131,8 +131,9 @@ document.addEventListener('DOMContentLoaded',()=>{
             del.addEventListener('click',()=>{
                 const c_ID = customer["c_ID"];
                 const delForm=document.getElementById('delItem');
-                delForm.addEventListener('submit',()=>{
-                        event.preventDefault();
+                delForm.addEventListener('submit',(event)=>{
+                    event.preventDefault();
+                    const delModal = bootstrap.Modal.getInstance(document.getElementById('delModal2'))
                         const urlDel="http://127.0.0.1:5000/api/customer";
                         fetch(urlDel,{
                             method:'DELETE',
@@ -142,6 +143,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                         .then(response=>response.json())
                         .then(data=>{
                             console.log(data);
+                            delModal.hide()
                         })
                 })
             })

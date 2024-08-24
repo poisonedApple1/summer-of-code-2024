@@ -1,235 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout</title>
     {% include 'stuff.html' %}
-    <link rel="stylesheet" href="../static/css/checkout2.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../static/css/checkout2.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
     {% include 'navbar_admin.html'%}
     <div class="container-fluid" id="cont">
-        <div class="row" id="row1">
-            <div class="col-lg-2" id="leftBar">
-                <h6><i class="bi bi-list"></i>Category</h6>
-                <ol id="catList">
-                    <li>Stationary</li>
-                    <li>Fruits/Vegetables</li>
-                </ol>
-            </div>
-            <div class="col-lg-7" id="items">
-                <div class="container-fluid " id="showItems">
-                    <div class="row">
-                        <form id="searchItem">
-                            <div class="form-floating my-3">
-                                <input type="text" class="form-control"  id="searchSKU" placeholder="name">
-                                <label for="floatingInput" id="lable1">Search by SKU</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                        <div class="col-1 col-lg-2 itemCard"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3" id="rightBar">
-                <div id="customerInfo">
-                    <h6 id="custName">NAME</h6>
-                </div>
-                <hr>
-                <div id="addedItems">
-                    <!-- <p>Items added will be</p>
-                    <p>displayed here</p> -->
-                    <div class="addedItemCard">
-                        <div class="addedItemData">
-                            <h6 class="addedItemName">
-                                Item Name
-                            </h6>
-                            <p class="addedItemPrice">
-                                price
-                            </p>
-                        </div>
-                        <div class="qtyCounter">
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger minus">-</button>
-                                <button type="button" class="btn btn-dark qtyCount">1</button>
-                                <button type="button" class="btn btn-success plus">+</button>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="addedItemCard">
-                        <div class="addedItemData">
-                            <h6 class="addedItemName">
-                                Item Name
-                            </h6>
-                            <p class="addedItemPrice">
-                                price
-                            </p>
-                        </div>
-                        <div class="qtyCounter">
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger minus">-</button>
-                                <button type="button" class="btn btn-dark qtyCount">1</button>
-                                <button type="button" class="btn btn-success plus">+</button>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="addedItemCard">
-                        <div class="addedItemData">
-                            <h6 class="addedItemName">
-                                Item Name
-                            </h6>
-                            <p class="addedItemPrice">
-                                price
-                            </p>
-                        </div>
-                        <div class="qtyCounter">
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger minus">-</button>
-                                <button type="button" class="btn btn-dark qtyCount">1</button>
-                                <button type="button" class="btn btn-success plus">+</button>
-                              </div>
-                        </div>
-                    </div>
-
-                    <div class="addedItemCard">
-                        <div class="addedItemData">
-                            <h6 class="addedItemName">
-                                Item Name
-                            </h6>
-                            <p class="addedItemPrice">
-                                price
-                            </p>
-                        </div>
-                        <div class="qtyCounter">
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger minus">-</button>
-                                <button type="button" class="btn btn-dark qtyCount">1</button>
-                                <button type="button" class="btn btn-success plus">+</button>
-                              </div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-                <hr>
-
-                <div id="checkoutItems">
-                    <div id="orderData">
-                        <p>Number Of items: <span id="itemCount"> X</span></p>
-                        <p>Total: <span id="total"> X</span></p>
-                    </div>
-                    
-                    
-                    <div class="submit" id="addDone">
-                        <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button>
-                    </div>
-                    
-                </div>
-            </div>
+      <div class="row" id="row1">
+        <div class="col-lg-2" id="leftBar">
+          <h6><i class="bi bi-list"></i>Category</h6>
+          <ol id="catList">
+            <li>Stationary</li>
+            <li>Fruits/Vegetables</li>
+          </ol>
         </div>
+        <div class="col-lg-7" id="items">
+          <div class="container-fluid" id="showItems">
+            <div class="row">
+              <form id="searchItem">
+                <div class="form-floating my-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="searchSKU"
+                    placeholder="name"
+                  />
+                  <label for="floatingInput" id="lable1">Search by SKU</label>
+                </div>
+              </form>
+          </div>
+          <div class="row justify-content-center" id="middleDiv">
+              <div class="col-1 col-lg-2 itemCard" type="button">
+                <h6>Item Name</h6>
+                <p>Price : X</p>
+                <p>Qty : X</p>
+                <hr />
+                <p>Description : blah blah</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3" id="rightBar">
+          <div id="customerInfo">
+            <h6 id="custName">Customer Name: <strong>{{c_name}}</strong></h6>
+          </div>
+          <hr />
+          <div id="addedItems">
+            <p>Items added will be</p>
+            <p>displayed here</p>
+          </div>
+          <hr />
+          <div id="checkoutItems">
+            <div id="orderData">
+              <p>Number Of items: --</p>
+              <p>Total: <span id="total"> --</span></p>
+            </div>
+
+            <div class="submit" id="addDone">
+              <button
+                type="submit"
+                class="btn btn-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <div id="modalCustomerData">
-                    <h1 class="modal-title fs-5" id="modalCustomerName">Customer Name</h1>
-                    <p id="modalCustomerPhoneNumber">Phone Number</p>
-                </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div id="modalCustomerData">
+              <h1 class="modal-title fs-5" id="modalCustomerName">
+                {{c_name}}
+              </h1>
+              <p id="modalCustomerPhoneNumber">{{c_contact}}</p>
             </div>
-            <div class="modal-body">
-              <table id="modalTable" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Apple</td>
-                        <td>200</td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Edit</button>
-              <button type="button" class="btn btn-primary">Place Order</button>
-            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <table id="modalTable" class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Place Order</button>
           </div>
         </div>
       </div>
+    </div>
 
-
-      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <div id="modalCustomerData">
-                    <h1 class="modal-title fs-5" id="modalCustomerName">Customer Name</h1>
-                    <p id="modalCustomerPhoneNumber">Phone Number</p>
-                </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div
+      class="modal fade"
+      id="staticBackdrop2"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div id="modalCustomerData">
+              <h1 class="modal-title fs-5" id="modalCustomerName">
+                {{c_name}}
+              </h1>
+              <p id="modalCustomerPhoneNumber">{{c_contact}}</p>
             </div>
-            <div class="modal-body">
-              <table id="modalTable" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Apple</td>
-                        <td>200</td>
-                    </tr>
-                </tbody>
-              </table>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h5>Transaction Mode:</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="cash">
+              <label class="form-check-label" for="cash">
+                Cash
+              </label>
             </div>
-            <div class="modal-footer">
-                <h5>Transaction Status:<span id="status"></span></h5>
-              <button type="button" class="btn btn-primary">Home</button>
-              <button type="button" class="btn btn-primary">Print</button>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="upi" checked>
+              <label class="form-check-label" for="upi">
+                UPI
+              </label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="card" checked>
+              <label class="form-check-label" for="card">
+                Credit Card/Debit Card
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" id="orderConfirm">Place Order</button>
           </div>
         </div>
       </div>
+    </div>
+
+    <div
+    class="modal fade"
+    id="staticBackdrop3"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div id="modalCustomerData">
+            <h1 class="modal-title fs-5" id="modalCustomerName">
+              {{c_name}}
+            </h1>
+            <p id="modalCustomerPhoneNumber">{{c_contact}}</p>
+          </div>
+          <a href="/checkout"
+            type="button"
+            class="btn-close"
+          ></a>
+        </div>
+        <div class="modal-body">
+          <h5>Transcation Success!</h5>
+          
+        </div>
+        <div class="modal-footer">
+          <a type="button" id="printReceipt" class="btn btn-primary">Print Receipt</a>
+          <a href="/checkout"
+          type="button"
+          class="btn btn-primary"
+        >Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
     {% include 'bg_elements.html'%}
     <script>
-        function matchHeight(sourceId, targetId) {
-            var sourceElement = document.getElementById(sourceId);
-            var targetElement = document.getElementById(targetId);
-            var sourceHeight = sourceElement.offsetHeight;
-            targetElement.style.height = sourceHeight + 'px';
-            console.log('hey')
-            console.log(sourceHeight)
-            console.log(targetElement.style.height)
-        }
-        
-        // Call the function to match the height of #extra-content to #sidebar
-        matchHeight('leftBar', 'items');
+      function matchHeight(sourceId, targetId) {
+        var sourceElement = document.getElementById(sourceId);
+        var targetElement = document.getElementById(targetId);
+        var sourceHeight = sourceElement.offsetHeight;
+        targetElement.style.height = sourceHeight + "px";
+      }
+      matchHeight("leftBar", "items");
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/babel" src="../static/js/checkout2.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+      integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
 </html>

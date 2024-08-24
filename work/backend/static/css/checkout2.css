@@ -10,7 +10,7 @@ body{
 }
 
 #leftBar{
-    background:linear-gradient(#8f2d56 60%,#8f2d567e);
+    background:linear-gradient(#000000 60%,rgba(0, 0, 0, 0.466));
     color: #fec261;
     padding: 2rem;
     border-right: 2px solid #fbb13c;
@@ -28,7 +28,7 @@ body{
 }
 
 #rightBar{
-    background:linear-gradient(#8f2d56 60%,#8f2d567e);
+    background:linear-gradient(#000000 30%,rgba(0, 0, 0, 0.553));
     color: #fbb13c;
     font-weight: 500;
     padding: 2rem;
@@ -39,20 +39,56 @@ body{
 
 #searchSKU{
     background-color: #fbb13c;
-    border: 2px solid #8f2d56;
+    border: 2px solid #000000;
 }
 
 
 #lable1{
-    color: #8f2d56;
+    color: #000000b0;
     font-weight: bold;
 }
 
 .itemCard{
-    height:8rem;
-    background-color:#8f2d56;
+    padding: 0;
+    height:10rem;
+    background-color:rgba(0, 0, 0, 0.667);
     border: 2px solid #fbb13c;
     margin: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-flow: column;
+    color: #ff9d00;
+    border-radius: 25px;
+    padding-bottom: 1rem;
+}
+
+.descItem{
+    border-top: 0.5px solid #fbb13c;
+}
+
+.qtyItem{
+    flex-grow: 1;
+}
+
+.itemCard div{
+    margin-bottom: 10px;
+    /* background-color: #000000; */
+    /* display: block; */
+    color: #fbb13c;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #fbb13c;
+    padding-bottom: 0.3rem;
+    padding-top: 0.3rem;
+    background-color:#ad185648;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.itemCard p {
+    margin: 0;
+    text-align: center;
 }
 
 
@@ -143,3 +179,12 @@ body{
     border: 4px solid black;
 }
 
+.categories{
+    padding: 0.3rem;
+}
+
+.categories:hover{
+    background-color:#0000006b;
+    border:2px solid #fbb13c;
+    border-radius: 0.5rem;
+}

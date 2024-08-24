@@ -9,6 +9,8 @@
 
 
 
+
+
 // function MyComponent(objec) {
 //     const[a ,seta]=React.useState(2);
 
@@ -36,6 +38,14 @@
   // root.render(<MyComponent name="aman" age={18} />);
 
 function CustomerDetails({name,contact,Address}){
+  const proceed=(inName,inContact)=>()=>{
+    console.log("yooo");
+    const customerDetailsURl=`?name=${encodeURIComponent(inName)}&contact=${inContact}`;
+    window.location.href="/addItems"+ customerDetailsURl;
+    console.log(customerDetailsURl);
+    console.log("wassup");
+  }
+
   return(
   <>
     <h6><strong>Details Entered</strong></h6>
@@ -48,7 +58,7 @@ function CustomerDetails({name,contact,Address}){
       <div id="showAdd" className="showC">{Address}</div>
     </>:null}
     <div id="proceed">
-        <button type="submit" className="btn btn-success">Proceed to checkout <i className="bi bi-arrow-right-square"></i></button>
+        <button type="button" className="btn btn-success" id="proceedCheckout" onClick={proceed(name,contact)}>Proceed to checkout <i className="bi bi-arrow-right-square"></i></button>
     </div>
   </>
   );
@@ -79,6 +89,8 @@ function Alert({msg,type}){
     const inName=document.getElementById('signupName').value;
     const inContact=document.getElementById('signupContact').value;
     const inAddress=document.getElementById('signupAddress').value;
+
+    AlertRoot.render(<></>);
 
     if(!inName){
       AlertRoot.render(<Alert msg="Enter Name" type="danger" />);
@@ -111,12 +123,27 @@ function Alert({msg,type}){
           </>
             
           );
+          rightRoot.render(<><h6>Enter customer details to</h6>
+                <h6>proceed to Checkout</h6></>);
           return;
+          
         }
+
+        if(data["c_name"]!= inName){
+            AlertRoot.render(<>
+                <Alert msg="Wrong customer name entered" type="danger" />
+            </>)
+            rightRoot.render(<><h6>Enter customer details to</h6>
+                <h6>proceed to Checkout</h6></>);
+            return;
+        }
+
+        rightRoot.render(<CustomerDetails name={inName} contact={inContact} Address={inAddress}  />);
       }
     )
 
-    rightRoot.render(<CustomerDetails name={inName} contact={inContact} Address={inAddress}  />);
+
+    
 
   })
 
@@ -163,3 +190,4 @@ function Alert({msg,type}){
     )
 
   })
+

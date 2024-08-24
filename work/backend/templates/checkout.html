@@ -21,8 +21,8 @@
         <div class="row align-items-center" id="checkoutRow">
             <div class="col-lg-2" id="staffDetails">
                 <div id="staffIMG"></div>
-                <div id="staffNAME">NAME</div>
-                <div id="staffEMAIL">EMAIL</div>
+                <div id="staffNAME">{{name}}</div>
+                <div id="staffEMAIL">{{email}}</div>
                 <div id="staffROLE">CASHIER</div>
                 <div id="root"></div>
             </div>
@@ -33,18 +33,18 @@
                     <div class="line"></div>
                     <form id="customerDetails">
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control"  id="signupName" placeholder="name">
+                            <input type="text" class="form-control"  id="signupName" name="c_name" placeholder="name">
                             <label for="floatingInput">Name*</label>
                         </div>
 
 
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control"  id="signupContact" placeholder="name">
+                            <input type="text" class="form-control"  id="signupContact" name="c_contact" placeholder="name">
                             <label for="floatingInput">Contact*</label>
                         </div>
 
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control"  id="signupAddress" placeholder="name">
+                            <input type="text" class="form-control"  id="signupAddress" name="c_address" placeholder="name">
                             <label for="floatingInput">Address</label>
                         </div>
 

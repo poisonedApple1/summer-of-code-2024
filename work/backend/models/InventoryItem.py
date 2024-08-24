@@ -9,6 +9,7 @@ class InventoryItem(db.Model):
     Item_description=db.Column(db.String(),nullable=False)
     Item_price=db.Column(db.Integer,nullable=False)
     Item_qty=db.Column(db.Integer,nullable=False)
+    Item_category=db.Column(db.String())
 
     def __init__(self, data):
  
@@ -16,12 +17,16 @@ class InventoryItem(db.Model):
         desc=data["Item_description"]  
         price=data["Item_price"] 
         qty =data["Item_qty"]
- 
-     
+             
         self.Item_name=name     
         self.Item_description=desc     
         self.Item_price=price       
-        self.Item_qty=qty 
+        self.Item_qty=qty
+        if(data["Item_category"]):
+            self.Item_category=data["Item_category"]
+        else:
+            self.Item_category="Others"
+            
     
     def register_if_not_exist(self):
         item=InventoryItem.query.filter(InventoryItem.Item_SKU==self.Item_SKU).all()
@@ -65,3 +70,26 @@ class InventoryItem(db.Model):
 
     def __repr__(self):
         return f"<InventoryItem SKU: {self.Item_SKU} name: {self.Item_name} desc: {self.Item_description} price: {self.Item_price} qty: {self.Item_qty} >"
+    
+    def getCategory():
+        db_cat=db.session.query(InventoryItem.Item_category).distinct().all()
+        cat=[category[0] for category in db_cat ]
+        return {"categories": cat}
+    
+    def getCatList(category):
+        if(category!='All'):
+            db_list=InventoryItem.query.filter(InventoryItem.Item_category==category).all()
+        else:
+            db_list=InventoryItem.query.all()
+        itemList=[{'Item_SKU': item.Item_SKU,
+            'Item_name': item.Item_name,
+            'Item_price':item.Item_price,
+            'Item_description':item.Item_description,
+            'Item_qty':item.Item_qty} for item in db_list]
+        return itemList
+
+    def updByName(name,qty):
+        item=InventoryItem.query.filter(InventoryItem.Item_name==name).first()
+        item.Item_qty-=qty
+        db.session.commit()
+        return item 

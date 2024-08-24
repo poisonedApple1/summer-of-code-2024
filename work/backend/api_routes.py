@@ -1,7 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint,request,send_file
 from flask_restx import Api,Resource,reqparse
-from app import db
+from app import db,bcrypt,loginmanager
 from flask_cors import CORS
+from flask_login import logout_user,login_user,login_required,current_user
 
 
 api_app=Blueprint('api_blueprint',__name__)
@@ -12,6 +13,8 @@ from models.Customer import Customer
 from models.Transaction import Transaction
 from models.Staff import Staff
 from models.InventoryItem import InventoryItem
+
+
 
 #manage Customer Data-------------------------------------------------------------------
 
@@ -193,6 +196,10 @@ api.add_resource(TransactionList,"/transactData")
 
 #manage staff data--------------------------------------------------------------------------------------------------
 
+# staff_login=reqparse.RequestParser()
+# staff_login.add_argument("s_email",type=str,help="email not provided",required=True)
+# staff_login.add_argument("s_password",type=str,help="password not provided",required=True)
+
 staff_in=reqparse.RequestParser()
 staff_in.add_argument("s_name",type=str,help="Name not provided",required=True)
 staff_in.add_argument("s_email",type=str,help="email not provided",required=True)
@@ -200,9 +207,8 @@ staff_in.add_argument("s_contact",type=str,help="contact not provided",required=
 staff_in.add_argument("s_isAdmin",type=bool,help="admin info not provided",required=True)
 staff_in.add_argument("s_password",type=str,help="password not provided",required=True)
 
-staff_find=reqparse.RequestParser()
-staff_find.add_argument("s_contact",type=str,help="contact not provided",required=True)
-staff_find.add_argument("s_email",type=str,help="email not provided",required=True)
+
+
 
 staff_del=reqparse.RequestParser()
 staff_del.add_argument("s_ID",type=str,help="id not provided",required=True)
@@ -216,20 +222,19 @@ staff_upd.add_argument("s_email",type=str,help="change in email invalid ")
 
 class StaffData(Resource):
 
-    def put(self):
-        data=staff_find.parse_args()
-        cont=data["s_contact"]
-        staff= Staff.get_by_contact(cont)
-        
-        if(staff):
-            print("Data found!")
-            if(staff.s_email==data["s_email"]):
-                return {"auth":True},201
-            else:
-                return {"auth":False , "msg":"Wrong Email!"}
-        else:
-            return {"auth":False, "msg":"Wrong Password!"},404
-    
+    # def put(self):
+    #     data=staff_login.parse_args()
+    #     email=data["s_email"]
+    #     staff= Staff.query.filter(Staff.s_email==email).first()
+
+    #     if staff and bcrypt.check_password_hash(staff.s_password,data["s_password"]):
+    #         # login_user(staff)
+    #         staff1=Staff.query.filter_by(s_ID='1').first()
+    #         login_user(staff1,remember=True)
+    #         return {"msg":True}
+    #     else:
+    #         return{"msg":False}
+           
     def post(self):
         data=staff_in.parse_args()
         staff=Staff(data)
@@ -295,6 +300,7 @@ item_in.add_argument("Item_name",type=str,help="Name not provided",required=True
 item_in.add_argument("Item_description",type=str,help="desc not provided",required=True)
 item_in.add_argument("Item_price",type=int,help="price not provided",required=True)
 item_in.add_argument("Item_qty",type=int,help="qty not provided",required=True)
+item_in.add_argument("Item_category",type=str,help="category invalud")
 
 item_find=reqparse.RequestParser()
 item_find.add_argument("Item_SKU",type=str,help="sku not provided",required=True)
@@ -309,7 +315,14 @@ item_upd.add_argument("Item_description",type=str,help="change in desc invalid "
 item_del=reqparse.RequestParser()
 item_del.add_argument("Item_SKU",type=int,required=True,help="Invalid sku")
 
+item_find_name=reqparse.RequestParser()
+item_find_name.add_argument("Item_name",type=str,help="invalid name",required=True)
+item_find_name.add_argument("Item_qty",type=int,help="invalid qty input",required=True)
+
 class ItemData(Resource):
+    def get(self):
+        return InventoryItem.getCategory()
+
     def put(self):
         data=item_find.parse_args()
         sku=data["Item_SKU"]
@@ -353,6 +366,12 @@ class ItemUpd(Resource):
         else:
             return {"msg":f"could not find item with SKU {data["Item_SKU"]}"}
     
+    def post(self):
+        data=item_find_name.parse_args()
+        item=InventoryItem.updByName(data["Item_name"],data["Item_qty"])
+        if item:
+            return {'msg':"Done"}
+        return {'msg':'Error'}
         
 api.add_resource(ItemData,"/item")
 api.add_resource(ItemUpd,"/item/update")
@@ -363,6 +382,9 @@ api.add_resource(ItemUpd,"/item/update")
 item_list=reqparse.RequestParser()
 item_list.add_argument("offset",type=int,required=True,help="offset not provided")
 
+item_cat=reqparse.RequestParser()
+item_cat.add_argument('category',type=str,help="invalid category")
+
 class ItemList(Resource):
     def post(self):
         data=item_list.parse_args()
@@ -370,6 +392,79 @@ class ItemList(Resource):
         count=InventoryItem.itemCount()
         data=InventoryItem.fetchItem(offset)
         return { "data":data,"count": count}
+    
+    def put(self):
+        data=item_cat.parse_args()
+        catList=InventoryItem.getCatList(data["category"])
+        return catList
 
 api.add_resource(ItemList,"/itemData")
 #---------------------------------------------------------------------------------------------------------------
+#print invoice
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate,Table,TableStyle,Paragraph
+from datetime import datetime,timezone
+class PrintPdf(Resource):
+    def post(self):
+        data=request.json
+        items=data.get('items',[])
+        Totprice=data.get('price',0)
+        cat=data.get('cat',"Cash")
+        c_ID=data.get('c_ID',-1)
+        w,h = A4
+        doc = SimpleDocTemplate('invoice.pdf',pagesize=A4)
+        elements=[]
+        styles=getSampleStyleSheet() 
+        title=Paragraph("Bizarre Shopping Inc ®",style=styles['Title'])
+        title2=Paragraph("INVOICE",style=styles['Title'])
+        elements.append(title)
+        elements.append(title2)
+        id=Paragraph(f'Customer ID:{c_ID}',style=styles['Heading3'])
+        elements.append(id)
+        time=Paragraph(f'Date and Time of Transaction : {str(datetime.now())[:19]}',style=styles['Heading3'])
+        elements.append(time)
+        price=Paragraph(f'Total Price: Rs.{Totprice}',style=styles["Heading3"])
+        elements.append(price)
+        category=Paragraph(f'Payment Mode: {cat}',style=styles["Heading3"])
+        elements.append(category)
+
+        table_data = [["S.no","Item Name", "Quantity", "Price"]]
+        sno=0
+        for item in items:
+            sno+=1
+            name = item['props']['name']
+            qty = item['props']['qty']
+            price = item['props']['price']
+            table_data.append([sno,name, qty, price])
+        table=Table(table_data)
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.gainsboro),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.darkblue),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ]))
+        
+        elements.append(table)
+        doc.build(elements)
+        return send_file('invoice.pdf',as_attachment=True)
+api.add_resource(PrintPdf,'/print')
+        # c=canvas.Canvas('Hello.pdf')
+
+        # c.setStrokeColorRGB(0.5,0.5,0.5)
+        # c.setFillColorRGB(0.75 , 0.5 , 0.5)
+        # c.roundRect(50,50,w-100,h-100,10)
+
+        # heading= c.beginText(w/2-25,h-75)
+        # heading.textLine("INVOICE")
+        # heading.setFont("Times-Roman",12)
+
+        # c.drawText(heading)
+
+        # c.grid([80,100,400,w-80],[h-90,h-110,h-150])
+
+        # c.showPage()
+        # c.save()

@@ -13,33 +13,41 @@
         <div class="row justify-content-center align-items-center" id="loginBox">
 
             <div class="col-12">
-                <form id="logCredentials">
-                    <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
+                <form id="logCredentials" method="POST" action="">
+                    <!-- <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
                     <label class="btn" for="option1">Cashier</label>
 
 
                     <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
-                    <label class="btn" for="option2">Admin</label>
-                
+                    <label class="btn" for="option2">Admin</label> -->
+                    {{form.hidden_tag()}}
 
                     <div class="form-floating my-3"  >
-                        <input type="email" class="form-control"  id="loginEmail" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        {{ form.email(class="form-control", placeholder="name@example.com") }}
+                        {{ form.email.label(class="form-label") }}
                     </div>
                     <div class="form-floating mb-3" >
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                        {{ form.password(class="form-control", placeholder="Password") }}
+                        {{ form.password.label(class="form-label") }}
                     </div>
                     <div class="submit">
-                        <button type="submit" class="btn btn-outline-light">Sign In</button>
+                        {{ form.submit(class="btn btn-outline-light") }}
                     </div>
-                    <div id="alert"></div>
+                    <div id="alert">
+                        {%with messages=get_flashed_messages(with_categories=False)%}
+                            {% if messages %}
+                                <div class="alert alert-danger">
+                                    {{messages[0]}}
+                                </div>
+                            {% endif %}
+                        {%endwith%}
+                    </div>
                 </form>
             </div>
 
             <div class="col-12">
                 <p id="dont">Don't have an account?</p>
-                <a id="reg" href="signup.html">Register here</a>                
+                <a id="reg" href="/registerStaff">Register here</a>                
             </div>
 
         </div>

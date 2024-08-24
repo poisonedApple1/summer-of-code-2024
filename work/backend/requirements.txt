@@ -8,6 +8,5 @@ SQLAlchemy
 flask-cors
 flask_login
 flask_bcrypt
-
-
-
+flask_wtf
+reportlab

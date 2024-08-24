@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    {%include 'stuff.html' %}
+</head>
+<style>
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .main{
+        background-color:rgba(0, 0, 0, 0.673); 
+        color: #fbb13c;
+        border: 3px solid #fbb13c;
+        border-radius: 2rem;
+        height: 25vh;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    a{
+        display: inline;
+        width: 20%;
+        /* height: 10vh; */
+    }
+</style>
+
+<body>
+    <div class="main">
+        Successfully Logged out!
+        <a type="button" class="btn btn-outline-primary" href="/">Login Again</a>
+    </div>
+    {% include 'bg_elements.html'%}
+</body>
+</html>

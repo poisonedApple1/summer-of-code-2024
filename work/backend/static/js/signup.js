@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         const s_email = document.getElementById('signupEmail').value;
         const contact = document.getElementById('signupContact').value;
         const s_contact=String(contact)
-        const s_isAdmin=document.getElementById('signupRole').value;
+        var s_isAdmin=document.getElementById('signupRole').value;
         const s_password=document.getElementById('singupPassword').value;
         const re_s_password=document.getElementById('singupPasswordRep').value;
 
@@ -94,15 +94,18 @@ document.addEventListener("DOMContentLoaded",()=>{
             alert.appendChild(loginAlert);
             return;
         }
-
+        s_isAdmin = Number(s_isAdmin)
+        console.log({ s_name,s_email, s_contact ,s_isAdmin:s_isAdmin,s_password})
         const signup_url="http://127.0.0.1:5000/api/staff";
         fetch(signup_url,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ s_name,s_email, s_contact ,s_isAdmin,s_password})
+            body: JSON.stringify({ s_name,s_email, s_contact ,s_isAdmin:s_isAdmin,s_password})
         })
         .then(response=>response.json())
-        .then(data=>{
+            .then(data => {
+                console.log(JSON.stringify({ s_name, s_email, s_contact, s_isAdmin:s_isAdmin, s_password }));
+            console.log(s_isAdmin)
             if(data['msg']=='Done'){
                 var loginAlert=document.createElement("div");
                 loginAlert.setAttribute("role","alert");

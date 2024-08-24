@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         const contact = document.getElementById('signupContact').value;
         const s_contact=String(contact)
         const s_isAdmin=document.getElementById('signupRole').value;
+        const s_password=document.getElementById('singupPassword').value;
+        const re_s_password=document.getElementById('singupPasswordRep').value;
 
         var alert=document.getElementById("alert");
         var existing=document.getElementById("alertMsg");
@@ -51,6 +53,39 @@ document.addEventListener("DOMContentLoaded",()=>{
             return;
         }
 
+        if(!s_password){
+            var loginAlert=document.createElement("div");
+            loginAlert.setAttribute("role","alert");
+            loginAlert.setAttribute("id","alertMsg");
+            loginAlert.setAttribute("class","alert alert-danger");
+            loginAlert.innerHTML="Please enter password";
+            console.log("in");
+            alert.appendChild(loginAlert);
+            return;
+        }
+
+        if(!re_s_password){
+            var loginAlert=document.createElement("div");
+            loginAlert.setAttribute("role","alert");
+            loginAlert.setAttribute("id","alertMsg");
+            loginAlert.setAttribute("class","alert alert-danger");
+            loginAlert.innerHTML="Please enter password again";
+            console.log("in");
+            alert.appendChild(loginAlert);
+            return;
+        }
+
+        if(s_password!=re_s_password){
+            var loginAlert=document.createElement("div");
+            loginAlert.setAttribute("role","alert");
+            loginAlert.setAttribute("id","alertMsg");
+            loginAlert.setAttribute("class","alert alert-danger");
+            loginAlert.innerHTML="Passwords dont match";
+            console.log("in");
+            alert.appendChild(loginAlert);
+            return;
+        }
+
         if(s_isAdmin==2){
             var loginAlert=document.createElement("div");
             loginAlert.setAttribute("role","alert");
@@ -66,7 +101,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         fetch(signup_url,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ s_name,s_email, s_contact ,s_isAdmin})
+            body: JSON.stringify({ s_name,s_email, s_contact ,s_isAdmin,s_password})
         })
         .then(response=>response.json())
         .then(data=>{

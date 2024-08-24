@@ -18,6 +18,7 @@ class Staff(UserMixin,db.Model):
 
 
     def __init__(self,data):
+        print(data)
         s_name=data["s_name"]
         s_email=data["s_email"]
         s_isAdmin=data["s_isAdmin"]
