@@ -66,9 +66,9 @@ class CustomerData(Resource):
         data=customer_upd.parse_args()
         update=Customer.updateCustomer(data)
         if update:
-            return {"msg":f"updated data of {data["c_ID"]}"}
+            return {"msg":f"updated data of {data['c_ID']}"}
         else:
-            return {"msg":f"could not find item with id {data["c_ID"]}"}
+            return {"msg":f"could not find item with id {data['c_ID']}"}
         
     def delete(self):
         data=customer_del.parse_args()
@@ -144,9 +144,9 @@ class TransactionData(Resource):
         data=transaction_upd.parse_args()
         update=Transaction.updateTransaction(data)
         if update:
-            return {"msg":f"updated data of {data["t_ID"]}"}
+            return {"msg":f"updated data of {data['t_ID']}"}
         else:
-            return {"msg":f"could not find item with id {data["t_ID"]}"}
+            return {"msg":f"could not find item with id {data['t_ID']}"}
         
     def delete(self):
         data=transaction_del.parse_args()
@@ -285,9 +285,9 @@ class StaffData(Resource):
         data=staff_upd.parse_args()
         update=Staff.updateStaff(data)
         if update:
-            return {"msg":f"updated data of {data["s_ID"]}"}
+            return {"msg":f"updated data of {data['s_ID']}"}
         else:
-            return {"msg":f"could not find item with id {data["s_ID"]}"}
+            return {"msg":f"could not find item with id {data['s_ID']}"}
         
     def delete(self):
         data=staff_del.parse_args()
@@ -404,9 +404,9 @@ class ItemUpd(Resource):
         data=item_upd.parse_args()
         update=InventoryItem.updateItem(data)
         if update:
-            return {"msg":f"updated data of {data["Item_SKU"]}"}
+            return {"msg":f"updated data of {data['Item_SKU']}"}
         else:
-            return {"msg":f"could not find item with SKU {data["Item_SKU"]}"}
+            return {"msg":f"could not find item with SKU {data['Item_SKU']}"}
     
     def post(self):
         data=item_find_name.parse_args()
